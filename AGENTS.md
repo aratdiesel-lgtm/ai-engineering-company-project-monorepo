@@ -13,12 +13,12 @@ If any required file is missing or conflicts with another source, do not infer a
 
 ## Before every commit
 
-Complete these steps in order before a commit is proposed:
+Complete these steps in order before any commit is proposed:
 
-1. **Verify branch and scope.** Check the active branch and compare the change with `BRIEFING.md`, `memory-bank/projectbrief.md`, and `memory-bank/progress.md`. Confirm the work belongs to the approved HealthCore milestone.
-2. **Check ownership and protected areas.** Read the relevant folder `README.md`, verify that each file is in its proper repository area, and identify any protected paths the change would touch. Obtain explicit developer confirmation before changing protected content.
-3. **Validate the change.** Check acceptance criteria, consistency with the HealthCore context, formatting, and available relevant tests/checks. Review the full status and diff; ensure there are no orphaned files, accidental scope changes, or product code outside its designated folders.
-4. **Update and present.** Update `memory-bank/progress.md` with completed work and validation results. Present a concise summary and diff to the developer and wait for approval before any commit.
+1. **Verify branch and scope.** Confirm the active branch is `feature/agent-memory-bank`. Compare the changes with `BRIEFING.md`, `memory-bank/projectbrief.md`, `memory-bank/techContext.md`, and `memory-bank/progress.md`; confirm they fit the approved HealthCore milestone. This milestone is limited to governance and project context: do not introduce product code or applications outside its scope.
+2. **Check repository ownership and compliance.** Read the relevant folder `README.md` and follow the monorepo routes: the public website belongs in `./uis/website`, the internal backoffice in `./uis/backoffice`, and backend/API work in the centralized `/services` application. Keep development-agent configuration (`.agents/`, root `AGENTS.md`, and `memory-bank/`) separate from product assets (`/agents` and `/skills`). Treat HIPAA and UK GDPR as applicable constraints; never add or expose PHI/PII, credentials, secrets, or `.env` files. Identify any protected paths the changes would touch and obtain explicit developer confirmation before changing them.
+3. **Validate scope and working tree.** Check acceptance criteria, HealthCore consistency, formatting, and relevant available tests/checks. Review `git status` and the complete `git diff`; confirm there are no orphaned files, unintended changes, or product code outside the approved scope.
+4. **Update and present.** Record verified work and validation results in `memory-bank/progress.md`. Present a clear summary and the relevant diff to the developer for review and approval. The agent must never execute `git commit` or `git push`; any commit is performed manually by the developer after explicit approval.
 
 The agent must not run `git commit` or `git push`. A commit, if approved, is performed manually by the developer.
 
@@ -26,13 +26,13 @@ The agent must not run `git commit` or `git push`. A commit, if approved, is per
 
 Without explicit developer confirmation, do not modify, move, overwrite, or delete:
 
-- `BRIEFING.md`, `CONTEXT-healthcore-briefing.md`, or `CONTEXT.md`.
-- `.git/` or Git metadata.
-- Credentials, tokens, private keys, `.env` files, or other sensitive configuration/data.
-- Existing product and infrastructure areas, including `/services`, `/uis`, `/infra`, `/data`, `/agents`, `/skills`, `/mcps`, `/workflows`, `/packages`, `/shared`, `/scripts`, and `/internal`.
-- Existing base `README.md` files, including the root README and folder-level guides.
+- `BRIEFING.md`, `CONTEXT-healthcore-briefing.md`, and `CONTEXT.md`.
+- `.git/` and all Git metadata.
+- `.env` files and all credentials, tokens, private keys, secrets, or sensitive configuration/data. Never expose PHI/PII in repository content, examples, or logs.
+- Existing root and folder-level `README.md` files, and `docker-compose.yml`.
+- Existing product and infrastructure folders: `/services`, `/uis`, `/data`, `/infra`, `/agents`, `/skills`, `/mcps`, `/workflows`, `/packages`, `/shared`, `/docs`, `/scripts`, and `/internal`.
 
-An explicit instruction to work in one of these paths authorizes only the specifically requested scope; it does not authorize unrelated cleanup. Never expose secrets or patient-identifying data in generated documentation, examples, logs, or repository content.
+An explicit instruction to work in one of these paths authorizes only the specifically requested scope; it does not authorize unrelated cleanup. Preserve the separation between development-agent configuration (`.agents/` and `memory-bank/`) and product assets.
 
 ## Scope and placement
 
